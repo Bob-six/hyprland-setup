@@ -1,0 +1,47 @@
+/*
+          _                         _
+__      _| | ___   __ _  ___  _   _| |_
+\ \ /\ / / |/ _ \ / _` |/ _ \| | | | __|
+ \ V  V /| | (_) | (_| | (_) | |_| | |_
+  \_/\_/ |_|\___/ \__, |\___/ \__,_|\__|
+                  |___/
+Icons come from the wlogout package (/usr/share/wlogout/icons), so there are no
+binary assets to keep in this repo.
+*/
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "Fira Sans Semibold", sans-serif;
+    background-image: none;
+    transition: 20ms;
+    box-shadow: none;
+}
+
+window {
+    background-color: rgba(30, 30, 46, 0.92);
+}
+
+button {
+    color: #cdd6f4;
+    font-size: 18px;
+    background-color: rgba(49, 50, 68, 0.5);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 25%;
+    border: 2px solid rgba(180, 190, 254, 0.25);
+    border-radius: 20px;
+    margin: 10px;
+}
+
+button:focus,
+button:active,
+button:hover {
+    color: #1e1e2e;
+    background-color: #89b4fa;
+    border-color: #89b4fa;
+}
+
+#lock     { background-image: image(url("/usr/share/wlogout/icons/lock.png")); }
+#logout   { background-image: image(url("/usr/share/wlogout/icons/logout.png")); }
+#suspend  { background-image: image(url("/usr/share/wlogout/icons/suspend.png")); }
+#reboot   { background-image: image(url("/usr/share/wlogout/icons/reboot.png")); }
+#shutdown { background-image: image(url("/usr/share/wlogout/icons/shutdown.png")); }

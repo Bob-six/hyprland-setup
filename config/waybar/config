@@ -1,0 +1,32 @@
+{
+    "layer": "top",
+    "margin-top": 14,
+    "margin-bottom": 0,
+    "margin-left": 14,
+    "margin-right": 14,
+    "spacing": 0,
+
+    "include": ["~/.config/waybar/modules.json"],
+
+    "modules-left": [
+        "custom/appmenu",
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "hyprland/window"
+    ],
+    "modules-right": [
+        "pulseaudio",
+        "network",
+        "bluetooth",
+        "cpu",
+        "memory",
+        "custom/gpu",
+        "hyprland/language",
+        "idle_inhibitor",
+        "battery",
+        "tray",
+        "custom/exit",
+        "clock"
+    ]
+}

@@ -1,0 +1,73 @@
+# One package per line. install.sh installs whatever is in the official repos
+# with pacman and falls back to an AUR helper (paru/yay) for the rest, so you
+# don't have to care which is which.
+
+# ── Compositor & the hypr* ecosystem ───────────────────────────────
+hyprland
+hyprpaper                 # wallpapers
+hypridle                  # idle -> dim, lock, dpms off, suspend
+hyprlock                  # lock screen
+hyprsunset                # night light
+hyprpolkitagent           # GUI auth prompts (pkexec, gparted, ...)
+xdg-desktop-portal-hyprland   # screen share, file pickers
+
+# ── Shell / desktop pieces ─────────────────────────────────────────
+waybar
+rofi-wayland              # launcher, clipboard picker, wallpaper picker, cheat sheet
+dunst                     # notifications
+wlogout                   # power menu
+alacritty
+kitty
+
+# ── Audio ──────────────────────────────────────────────────────────
+pipewire
+pipewire-pulse
+pipewire-alsa
+wireplumber               # provides wpctl, used by the volume binds
+pavucontrol
+
+# ── Network & bluetooth ────────────────────────────────────────────
+networkmanager
+network-manager-applet    # nm-applet + nm-connection-editor
+bluez
+bluez-utils
+blueman
+
+# ── Tools the binds and scripts call ───────────────────────────────
+brightnessctl
+playerctl
+wl-clipboard              # wl-copy / wl-paste
+cliphist                  # clipboard history
+grim                      # screenshots
+slurp                     # region select
+swappy                    # screenshot annotation
+jq                        # lock.sh, keybinds.sh
+polkit
+xdg-user-dirs
+
+# ── File manager ───────────────────────────────────────────────────
+thunar
+thunar-volman
+gvfs                      # trash, mounting
+tumbler                   # thumbnails
+
+# ── Theming ────────────────────────────────────────────────────────
+qt6ct                     # QT_QPA_PLATFORMTHEME points at this
+papirus-icon-theme        # rofi and dunst both ask for Papirus-Dark
+nwg-look                  # GTK theme picker for wayland
+
+# ── Fonts the configs name explicitly ──────────────────────────────
+ttf-jetbrains-mono-nerd   # waybar + rofi + kitty
+ttf-firacode-nerd         # alacritty
+inter-font                # dunst
+ttf-font-awesome          # waybar glyph fallbacks
+noto-fonts
+noto-fonts-emoji
+
+# ── Hardware video decode ──────────────────────────────────────────
+# Intel iGPU (what conf/host.conf's LIBVA_DRIVER_NAME=iHD expects)
+intel-media-driver
+libva-utils
+# NVIDIA: uncomment on a machine with one. nvidia-open-dkms for Turing+.
+# nvidia-open-dkms
+# nvidia-utils

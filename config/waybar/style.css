@@ -1,0 +1,171 @@
+/* ─── Palette (Catppuccin Mocha) ───────────────────────────── */
+@define-color bg       rgba(30,30,46,0.72);
+@define-color bg-solid #1e1e2e;
+@define-color fg       #cdd6f4;
+@define-color muted    #a6adc8;
+@define-color border   rgba(180,190,254,0.18);
+@define-color hover    rgba(180,190,254,0.16);
+
+@define-color accent   #89b4fa;  /* blue   */
+@define-color mauve    #cba6f7;  /* purple */
+@define-color green    #a6e3a1;
+@define-color yellow   #f9e2af;
+@define-color peach    #fab387;
+@define-color red      #f38ba8;
+@define-color teal     #94e2d5;
+@define-color pink     #f5c2e7;
+
+/* ─── Base ─────────────────────────────────────────────────── */
+* {
+  font-family: "JetBrainsMono Nerd Font", "Fira Sans",
+               "Font Awesome 6 Free", "Font Awesome 6 Brands", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+window#waybar {
+  background: transparent;
+  color: @fg;
+}
+
+/* ─── Generic module pill (glass) ──────────────────────────── */
+#window,
+#clock,
+#backlight,
+#pulseaudio,
+#network,
+#bluetooth,
+#battery,
+#cpu,
+#memory,
+#disk,
+#language,
+#idle_inhibitor,
+#custom-gpu,
+#custom-appmenu,
+#custom-exit {
+  margin: 4px 4px;
+  padding: 4px 14px;
+  background: @bg;
+  border: 1px solid @border;
+  border-radius: 12px;
+  color: @fg;
+}
+
+/* subtle lift + brighter edge on hover */
+#pulseaudio:hover,
+#network:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#custom-gpu:hover,
+#language:hover,
+#idle_inhibitor:hover,
+#bluetooth:hover,
+#clock:hover,
+#custom-appmenu:hover,
+#custom-exit:hover {
+  background: @hover;
+  border-color: rgba(180,190,254,0.45);
+}
+
+/* ─── App menu (left) ──────────────────────────────────────── */
+#custom-appmenu {
+  color: @bg-solid;
+  background: linear-gradient(135deg, @accent, @mauve);
+  font-weight: 700;
+  padding: 4px 16px;
+  margin-left: 8px;
+}
+
+/* ─── Workspaces ───────────────────────────────────────────── */
+#workspaces {
+  margin: 4px 4px;
+  padding: 2px 4px;
+  background: @bg;
+  border: 1px solid @border;
+  border-radius: 12px;
+}
+#workspaces button {
+  padding: 0 8px;
+  margin: 2px 1px;
+  color: @muted;
+  background: transparent;
+  border-radius: 9px;
+}
+#workspaces button.active {
+  color: @bg-solid;
+  background: linear-gradient(135deg, @accent, @mauve);
+  font-weight: 700;
+}
+#workspaces button.urgent { color: @bg-solid; background: @red; }
+#workspaces button:hover  { color: @fg; background: @hover; }
+
+/* ─── Window title (center) ────────────────────────────────── */
+#window {
+  color: @muted;
+  font-weight: 500;
+  font-style: italic;
+}
+window#waybar.empty #window {
+  background: transparent;
+  border-color: transparent;
+}
+
+/* ─── Color-coded modules (icon accent) ────────────────────── */
+#cpu        { color: @green; }
+#memory     { color: @mauve; }
+#custom-gpu { color: @pink; }
+#network    { color: @teal; }
+#pulseaudio { color: @yellow; }
+#battery    { color: @green; }
+#clock      { color: @accent; font-weight: 700; }
+#language       { color: @muted; }
+#idle_inhibitor { color: @muted; }
+#bluetooth      { color: @accent; }
+
+/* ─── States ───────────────────────────────────────────────── */
+#pulseaudio.muted { color: @red; }
+#network.disconnected { color: @red; }
+#idle_inhibitor.activated { color: @yellow; }
+#bluetooth.disabled, #bluetooth.off { color: @muted; }
+
+#battery.charging,
+#battery.plugged { color: @teal; }
+#battery.warning:not(.charging) { color: @yellow; }
+#battery.critical:not(.charging) {
+  background: rgba(243,139,168,0.22);
+  color: @red;
+  border-color: rgba(243,139,168,0.5);
+  animation: blink 1s infinite alternate;
+}
+@keyframes blink { to { opacity: 0.55; } }
+
+/* ─── Tray & exit ──────────────────────────────────────────── */
+#tray {
+  margin: 4px 6px;
+  padding: 0 8px;
+}
+#tray menu { background: @bg-solid; }
+
+#custom-exit {
+  color: @red;
+  font-size: 16px;
+  margin-right: 8px;
+}
+#custom-exit:hover {
+  background: rgba(243,139,168,0.22);
+  border-color: rgba(243,139,168,0.5);
+}
+
+/* ─── Tooltip ──────────────────────────────────────────────── */
+tooltip {
+  background: @bg-solid;
+  border: 1px solid @border;
+  border-radius: 12px;
+}
+tooltip label { color: @fg; padding: 4px; }

@@ -1,0 +1,161 @@
+/*
+#  ____        __ _
+# |  _ \ ___  / _(_)
+# | |_) / _ \| |_| |
+# |  _ < (_) |  _| |
+# |_| \_\___/|_| |_|
+#
+#  Glassmorphism v2 — icons, accents, mode switcher
+*/
+
+configuration {
+    modi:                       "drun,run,window";
+    show-icons:                 true;
+    icon-theme:                 "Papirus-Dark";
+    drun-display-format:        "{name}";
+    display-drun:               "Apps";
+    display-run:                "Run";
+    display-window:             "Window";
+    sidebar-mode:               true;
+    hover-select:               true;
+    me-select-entry:            "";
+    me-accept-entry:            "MousePrimary";
+    terminal:                   "kitty";
+}
+
+* {
+    bg0:            rgba(20, 22, 30, 0.78);
+    bg1:            rgba(35, 38, 52, 0.65);
+    bg2:            rgba(45, 50, 70, 0.55);
+    accent:         #7aa2f7;
+    accent-soft:    rgba(122, 162, 247, 0.18);
+    urgent:         #f7768e;
+    fg0:            #e0e6f0;
+    fg1:            #a9b1d6;
+    fg-muted:       #6b7394;
+    border-col:     rgba(122, 162, 247, 0.35);
+    selected-bg:    rgba(122, 162, 247, 0.85);
+    selected-fg:    #11121d;
+
+    background-color:   transparent;
+    text-color:         @fg0;
+    font:               "JetBrainsMono Nerd Font 12";
+}
+
+window {
+    transparency:       "real";
+    background-color:   @bg0;
+    border:             1px;
+    border-color:       @border-col;
+    border-radius:      18px;
+    width:              780px;
+    location:           center;
+    anchor:             center;
+    x-offset:           0;
+    y-offset:           -40px;
+    padding:            0;
+    children:           [ mainbox ];
+}
+
+mainbox {
+    background-color:   transparent;
+    padding:            18px;
+    spacing:            14px;
+    children:           [ inputbar, mode-switcher, listview ];
+}
+
+inputbar {
+    background-color:   @bg1;
+    text-color:         @fg0;
+    padding:            14px 18px;
+    border-radius:      12px;
+    border:             1px;
+    border-color:       @border-col;
+    spacing:            10px;
+    children:           [ prompt, entry ];
+}
+
+prompt {
+    background-color:   transparent;
+    text-color:         @accent;
+    font:               "JetBrainsMono Nerd Font 14";
+    padding:            0 6px 0 0;
+}
+
+entry {
+    background-color:   transparent;
+    text-color:         @fg0;
+}
+
+mode-switcher {
+    background-color:   transparent;
+    spacing:            8px;
+}
+
+button {
+    background-color:   @bg1;
+    text-color:         @fg1;
+    padding:            8px 14px;
+    border-radius:      10px;
+    cursor:             pointer;
+}
+
+button selected {
+    background-color:   @accent-soft;
+    text-color:         @accent;
+    border:             1px;
+    border-color:       @border-col;
+}
+
+listview {
+    background-color:   transparent;
+    columns:            2;
+    lines:              7;
+    spacing:            6px;
+    padding:            4px 0 0 0;
+    scrollbar:          false;
+    dynamic:            true;
+    cycle:              true;
+    fixed-height:       true;
+}
+
+element {
+    padding:            10px 12px;
+    spacing:            12px;
+    border-radius:      10px;
+    background-color:   transparent;
+    text-color:         @fg1;
+    cursor:             pointer;
+}
+
+element normal.normal     { background-color: transparent;       text-color: @fg1; }
+element alternate.normal  { background-color: @bg2;               text-color: @fg1; }
+element selected.normal   { background-color: @selected-bg;       text-color: @selected-fg; }
+element selected.active   { background-color: @selected-bg;       text-color: @selected-fg; }
+element normal.urgent     { background-color: transparent;        text-color: @urgent; }
+element selected.urgent   { background-color: @urgent;            text-color: @selected-fg; }
+
+element-icon {
+    background-color:   transparent;
+    size:               28px;
+    padding:            0 4px 0 0;
+    vertical-align:     0.5;
+}
+
+element-text {
+    background-color:   transparent;
+    text-color:         inherit;
+    vertical-align:     0.5;
+    highlight:          bold #7aa2f7;
+}
+
+message {
+    background-color:   @bg1;
+    border-radius:      10px;
+    padding:            8px 12px;
+}
+
+textbox {
+    background-color:   transparent;
+    text-color:         @fg1;
+}
