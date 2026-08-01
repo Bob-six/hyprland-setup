@@ -1,0 +1,39 @@
+-- Docs: https://wiki.hypr.land/Configuring/Basics/Variables/
+hl.config({
+    misc = {
+        disable_hyprland_logo = true,
+        disable_splash_rendering = true,
+        focus_on_activate = false, -- don't yank focus/workspace when an app "activates" itself
+                                   -- (this is what made the desktop jump on every notification)
+
+        -- Wake the display on input without lag (power saving plays nice with dpms)
+        mouse_move_enables_dpms = true,
+        key_press_enables_dpms = true,
+
+        -- Auto-hide the scratchpad once its last window is gone
+        close_special_on_empty = true,
+    },
+
+    -- Render — performance flags
+    render = {
+        new_render_scheduling = true, -- dynamic triple-buffering on weak frames -> smoother FPS
+        direct_scanout = 2,           -- auto: fullscreen apps bypass the compositor when it helps
+    },
+
+    -- Bind behaviour
+    binds = {
+        workspace_back_and_forth = true, -- SUPER+<current workspace> returns to the previous one
+        allow_workspace_cycles = true,
+    },
+
+    -- Stop the "update available" / donation banners from appearing on login
+    ecosystem = {
+        no_update_news = true,
+        no_donation_nag = true,
+    },
+
+    -- Xwayland apps look blurry on a scaled display otherwise. Harmless at scale 1.
+    xwayland = {
+        force_zero_scaling = true,
+    },
+})

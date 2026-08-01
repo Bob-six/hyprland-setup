@@ -1,5 +1,5 @@
 # Per-machine: monitors, workspace pinning, GPU env
-config/hypr/conf/host.conf
+config/hypr/conf/host.lua
 
 # install.sh backups
 *.bak.*

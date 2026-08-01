@@ -5,17 +5,17 @@
 # |  _ < (_) |  _| |
 # |_| \_\___/|_| |_|
 #
-#  Glassmorphism v2 — icons, accents, mode switcher
+#  Glassmorphism v3 — real blur (see hypr layerrule), single column, subtitles
 */
 
 configuration {
     modi:                       "drun,run,window";
     show-icons:                 true;
     icon-theme:                 "Papirus-Dark";
-    drun-display-format:        "{name}";
-    display-drun:               "Apps";
-    display-run:                "Run";
-    display-window:             "Window";
+    drun-display-format:        "{name}[ <span size='small' alpha='55%'>· {generic}</span>]";
+    display-drun:               " Apps";
+    display-run:                " Run";
+    display-window:             " Windows";
     sidebar-mode:               true;
     hover-select:               true;
     me-select-entry:            "";
@@ -24,22 +24,21 @@ configuration {
 }
 
 * {
-    bg0:            rgba(20, 22, 30, 0.78);
-    bg1:            rgba(35, 38, 52, 0.65);
-    bg2:            rgba(45, 50, 70, 0.55);
+    bg0:            rgba(20, 22, 30, 0.72);
+    bg1:            rgba(255, 255, 255, 0.06);
     accent:         #7aa2f7;
-    accent-soft:    rgba(122, 162, 247, 0.18);
+    accent-soft:    rgba(122, 162, 247, 0.14);
     urgent:         #f7768e;
     fg0:            #e0e6f0;
     fg1:            #a9b1d6;
     fg-muted:       #6b7394;
-    border-col:     rgba(122, 162, 247, 0.35);
-    selected-bg:    rgba(122, 162, 247, 0.85);
-    selected-fg:    #11121d;
+    border-col:     rgba(255, 255, 255, 0.10);
+    selected-bg:    rgba(122, 162, 247, 0.18);
+    selected-fg:    #cfe0ff;
 
     background-color:   transparent;
     text-color:         @fg0;
-    font:               "JetBrainsMono Nerd Font 12";
+    font:               "JetBrainsMono Nerd Font 11";
 }
 
 window {
@@ -47,98 +46,101 @@ window {
     background-color:   @bg0;
     border:             1px;
     border-color:       @border-col;
-    border-radius:      18px;
-    width:              780px;
+    border-radius:      16px;
+    width:              620px;
     location:           center;
     anchor:             center;
-    x-offset:           0;
-    y-offset:           -40px;
+    y-offset:           -60px;
     padding:            0;
     children:           [ mainbox ];
 }
 
 mainbox {
     background-color:   transparent;
-    padding:            18px;
-    spacing:            14px;
+    padding:            10px;
+    spacing:            8px;
     children:           [ inputbar, mode-switcher, listview ];
 }
 
+/* Search field: borderless, the icon carries the affordance */
 inputbar {
     background-color:   @bg1;
-    text-color:         @fg0;
-    padding:            14px 18px;
-    border-radius:      12px;
-    border:             1px;
-    border-color:       @border-col;
-    spacing:            10px;
+    padding:            12px 16px;
+    border-radius:      11px;
+    spacing:            12px;
     children:           [ prompt, entry ];
 }
 
 prompt {
     background-color:   transparent;
     text-color:         @accent;
-    font:               "JetBrainsMono Nerd Font 14";
-    padding:            0 6px 0 0;
+    font:               "JetBrainsMono Nerd Font 13";
+    vertical-align:     0.5;
 }
 
 entry {
     background-color:   transparent;
     text-color:         @fg0;
+    placeholder:        "Search…";
+    placeholder-color:  @fg-muted;
+    vertical-align:     0.5;
+    cursor:             text;
 }
 
+/* Mode tabs: flat text, only the active one gets a tinted pill */
 mode-switcher {
     background-color:   transparent;
-    spacing:            8px;
+    spacing:            4px;
 }
 
 button {
-    background-color:   @bg1;
-    text-color:         @fg1;
-    padding:            8px 14px;
-    border-radius:      10px;
+    background-color:   transparent;
+    text-color:         @fg-muted;
+    padding:            7px 14px;
+    border-radius:      9px;
     cursor:             pointer;
 }
 
 button selected {
     background-color:   @accent-soft;
     text-color:         @accent;
-    border:             1px;
-    border-color:       @border-col;
 }
 
+/* One column: app names stop truncating and the subtitle has room */
 listview {
     background-color:   transparent;
-    columns:            2;
-    lines:              7;
-    spacing:            6px;
-    padding:            4px 0 0 0;
+    columns:            1;
+    lines:              8;
+    spacing:            2px;
+    padding:            2px 0 0 0;
     scrollbar:          false;
     dynamic:            true;
     cycle:              true;
-    fixed-height:       true;
+    fixed-height:       false;
 }
 
 element {
-    padding:            10px 12px;
-    spacing:            12px;
-    border-radius:      10px;
+    padding:            9px 12px;
+    spacing:            13px;
+    border-radius:      9px;
     background-color:   transparent;
     text-color:         @fg1;
     cursor:             pointer;
 }
 
-element normal.normal     { background-color: transparent;       text-color: @fg1; }
-element alternate.normal  { background-color: @bg2;               text-color: @fg1; }
-element selected.normal   { background-color: @selected-bg;       text-color: @selected-fg; }
-element selected.active   { background-color: @selected-bg;       text-color: @selected-fg; }
-element normal.urgent     { background-color: transparent;        text-color: @urgent; }
-element selected.urgent   { background-color: @urgent;            text-color: @selected-fg; }
+/* No zebra striping — the selection bar is the only thing that should pop */
+element normal.normal     { background-color: transparent;  text-color: @fg1; }
+element alternate.normal  { background-color: transparent;  text-color: @fg1; }
+element normal.active     { background-color: transparent;  text-color: @accent; }
+element alternate.active  { background-color: transparent;  text-color: @accent; }
+element selected.normal   { background-color: @selected-bg; text-color: @selected-fg; }
+element selected.active   { background-color: @selected-bg; text-color: @selected-fg; }
+element normal.urgent     { background-color: transparent;  text-color: @urgent; }
+element selected.urgent   { background-color: @urgent;      text-color: #11121d; }
 
 element-icon {
     background-color:   transparent;
-    size:               28px;
-    padding:            0 4px 0 0;
+    size:               24px;
     vertical-align:     0.5;
 }
 
@@ -151,7 +153,7 @@ element-text {
 
 message {
     background-color:   @bg1;
-    border-radius:      10px;
+    border-radius:      9px;
     padding:            8px 12px;
 }
 

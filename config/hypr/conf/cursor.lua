@@ -1,0 +1,14 @@
+hl.config({
+    cursor = {
+        -- Software cursors: required on NVIDIA (hardware planes glitch), harmless
+        -- elsewhere. Flip it in conf/host.lua on an Intel/AMD-only machine.
+        no_hardware_cursors = true,
+
+        -- Hide the pointer while typing, bring it back on move. Small nicety,
+        -- no runtime cost.
+        hide_on_key_press = true,
+        inactive_timeout = 10,
+
+        -- default_monitor = "Bibata-Modern-Ice"
+    },
+})

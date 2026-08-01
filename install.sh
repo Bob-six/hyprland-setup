@@ -22,7 +22,7 @@ for p in "${wanted[@]}"; do
 done
 
 say "Installing ${#repo_pkgs[@]} packages from the official repos"
-sudo pacman -S --needed --noconfirm -- "${repo_pkgs[@]}"
+sudo pacman -Syu --needed --noconfirm -- "${repo_pkgs[@]}"
 
 if ((${#aur_pkgs[@]})); then
     helper=$(command -v paru || command -v yay || true)
@@ -35,10 +35,10 @@ if ((${#aur_pkgs[@]})); then
 fi
 
 # ── Per-machine config ─────────────────────────────────────────────
-host="$repo/config/hypr/conf/host.conf"
+host="$repo/config/hypr/conf/host.lua"
 if [[ ! -f $host ]]; then
     cp "$host.example" "$host"
-    say "Created config/hypr/conf/host.conf (gitignored) — edit it for this machine's monitors"
+    say "Created config/hypr/conf/host.lua (gitignored) — edit it for this machine's monitors"
 fi
 
 # ── Symlinks ───────────────────────────────────────────────────────
@@ -81,7 +81,7 @@ say "Done."
 cat <<'EOF'
 
 Next:
-  1. Edit config/hypr/conf/host.conf — monitors, workspace pinning, GPU env.
+  1. Edit config/hypr/conf/host.lua — monitors, workspace pinning, GPU env.
      `hyprctl monitors` (inside a session) lists output names.
   2. Log out and start Hyprland, or `hyprctl reload` if you're already in one.
   3. SUPER+/ shows every keybind. SHORTCUTS.md has the same list.

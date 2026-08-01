@@ -49,8 +49,8 @@ window#waybar {
 #custom-gpu,
 #custom-appmenu,
 #custom-exit {
-  margin: 4px 4px;
-  padding: 4px 14px;
+  margin: 3px 3px;
+  padding: 1px 11px;
   background: @bg;
   border: 1px solid @border;
   border-radius: 12px;
@@ -81,23 +81,23 @@ window#waybar {
   color: @bg-solid;
   background: linear-gradient(135deg, @accent, @mauve);
   font-weight: 700;
-  padding: 4px 16px;
+  padding: 1px 13px;
   margin-left: 8px;
   box-shadow: 0 2px 8px rgba(137,180,250,0.35);
 }
 
 /* ─── Workspaces ───────────────────────────────────────────── */
 #workspaces {
-  margin: 4px 4px;
-  padding: 2px 4px;
+  margin: 3px 3px;
+  padding: 0 3px;
   background: @bg;
   border: 1px solid @border;
   border-radius: 12px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.28);
 }
 #workspaces button {
-  padding: 0 8px;
-  margin: 2px 1px;
+  padding: 0 7px;
+  margin: 3px 1px;
   color: @muted;
   background: transparent;
   border-radius: 9px;
@@ -153,14 +153,14 @@ window#waybar.empty #window {
 
 /* ─── Tray & exit ──────────────────────────────────────────── */
 #tray {
-  margin: 4px 6px;
+  margin: 3px 6px;
   padding: 0 8px;
 }
 #tray menu { background: @bg-solid; }
 
 #custom-exit {
   color: @red;
-  font-size: 16px;
+  font-size: 15px;
   margin-right: 8px;
 }
 #custom-exit:hover {

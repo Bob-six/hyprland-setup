@@ -1,0 +1,46 @@
+-- Per-machine config. Copy to host.lua (install.sh does it) and edit.
+-- This file is required LAST, so anything here overrides the shared config.
+-- Docs: https://wiki.hypr.land/Configuring/Basics/Monitors/
+
+-- ── Monitors ───────────────────────────────────────────────────────
+-- Sane default: every output at its preferred mode, laid out automatically.
+hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
+
+-- `hyprctl monitors` lists names and available modes.
+--
+-- The dual-screen layout on the laptop:
+-- hl.monitor({ output = "HDMI-A-1", mode = "2560x1440@60", position = "0x0",    scale = 1 })
+-- hl.monitor({ output = "eDP-1",    mode = "preferred",    position = "2560x0", scale = 1 })
+
+-- ── Workspace → monitor pinning ────────────────────────────────────
+-- Without pinning, workspaces 1-10 land wherever you are. That is what you
+-- want on a single screen, so it is the default (i.e. nothing here).
+--
+-- The dual-screen split: 1-10 on the laptop panel, 11-14 on the external.
+-- Keys are SUPER+1..0 and SUPER+A/S/D/G — see conf/binds.lua.
+--
+-- for i = 1, 10 do
+--     hl.workspace_rule({ workspace = tostring(i), monitor = "eDP-1", persistent = true, default = i == 1 })
+-- end
+-- for i = 11, 14 do
+--     hl.workspace_rule({ workspace = tostring(i), monitor = "HDMI-A-1", persistent = true, default = i == 11 })
+-- end
+
+-- ── GPU / video decode ─────────────────────────────────────────────
+-- Hybrid Intel + NVIDIA laptop: VA-API goes through the Intel iGPU, because
+-- NVIDIA's VA-API is broken/absent there.
+-- hl.env("LIBVA_DRIVER_NAME", "iHD")
+-- hl.env("NVD_BACKEND", "direct")
+
+-- NVIDIA-primary machine instead — https://wiki.hypr.land/Nvidia/
+-- hl.env("LIBVA_DRIVER_NAME", "nvidia")
+-- hl.env("GBM_BACKEND", "nvidia-drm")
+-- hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
+-- hl.env("__GL_VRR_ALLOWED", "1")
+
+-- conf/cursor.lua forces software cursors (needed on NVIDIA). On an
+-- Intel/AMD-only machine you can take the hardware ones back:
+-- hl.config({ cursor = { no_hardware_cursors = false } })
+
+-- VM guest:
+-- hl.env("WLR_RENDERER_ALLOW_SOFTWARE", "1")

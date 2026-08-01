@@ -1,7 +1,7 @@
 # Shortcuts
 
 `SUPER` is the mod key. This file is generated from `hyprctl binds`, i.e. from the
-descriptions in [`config/hypr/conf/binds.conf`](config/hypr/conf/binds.conf) — the
+descriptions in [`config/hypr/conf/binds.lua`](config/hypr/conf/binds.lua) — the
 same source the in-session cheat sheet reads, so the two can't disagree.
 
 **`SUPER + /` opens the live version of this list in rofi** — that one is read
@@ -146,7 +146,7 @@ file as the printable copy.
 
 ## Touchpad gestures
 
-Configured in [`config/hypr/conf/gestures.conf`](config/hypr/conf/gestures.conf).
+Configured in [`config/hypr/conf/gestures.lua`](config/hypr/conf/gestures.lua).
 
 | Gesture | Action |
 | --- | --- |

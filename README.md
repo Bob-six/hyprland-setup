@@ -20,19 +20,19 @@ Idempotent. It:
 1. installs `packages.txt` — repo packages with `pacman`, anything else via `paru`/`yay`
 2. **symlinks** `config/*` into `~/.config/*`, moving anything in the way to `*.bak.<timestamp>`
 3. copies `wallpapers/` into `~/Pictures/wallpapers`, creates `~/Pictures/Screenshots`
-4. creates `config/hypr/conf/host.conf` from the example if missing (gitignored)
+4. creates `config/hypr/conf/host.lua` from the example if missing (gitignored)
 5. enables NetworkManager, bluetooth, and the pipewire user units
 
 Because the configs are symlinks, editing `~/.config/hypr/...` edits the repo. `git diff` is the sync.
 
-Then: edit `host.conf` for the machine, log into Hyprland, and check `hyprctl configerrors`.
+Then: edit `host.lua` for the machine, log into Hyprland, and check `hyprctl configerrors`.
 
 ## Per-machine config
 
-Everything machine-specific lives in one gitignored file, `config/hypr/conf/host.conf`,
-sourced last so it always wins: monitor modes, workspace→monitor pinning, GPU env vars.
+Everything machine-specific lives in one gitignored file, `config/hypr/conf/host.lua`,
+required last so it always wins: monitor modes, workspace→monitor pinning, GPU env vars.
 
-`host.conf.example` defaults to `monitor = , preferred, auto, 1` with no workspace
+`host.lua.example` defaults to every output at `preferred`/`auto` with no workspace
 pinning, so a single-screen machine works untouched. My dual-screen layout (1–10 on
 `eDP-1`, 11–14 on `HDMI-A-1`) is in there commented out, along with the NVIDIA-primary
 env block. `hyprctl monitors` lists output names.
@@ -42,10 +42,10 @@ env block. `hyprctl monitors` lists output names.
 ```
 config/
   hypr/
-    hyprland.conf          sources everything below, host.conf last
+    hyprland.lua           requires everything below, host.lua last
     conf/                  environments, cursor, input, general, decoration,
                            animations, layouts, gestures, misc, windowrules,
-                           binds, autostart, host.conf.example
+                           binds, autostart, host.lua.example   (all .lua)
     hyprlock.conf  hypridle.conf  hyprpaper.conf  hyprsunset.conf
     scripts/               lock, screenshot, clipboard, wallpaper, keybinds
   waybar/                  config, modules.json, style.css, scripts/gpu.sh
@@ -80,8 +80,8 @@ install. These all pointed at things that did not exist:
 | `group/quicklinks` + `waybar-quicklinks.json` | launched `flatpak run com.ml4w.hyprlandsettings`, not installed |
 | `mpd` module in `modules-right` | never defined in `modules.json`, no mpd installed |
 | `ml4w/apps/ML4W_Hyprland_Settings-x86_64.AppImage` | an AppImage GUI editing configs this repo now owns |
-| `hypr/conf/monitor.conf` | duplicated the monitor lines that `binds.conf` also set |
-| `split-monitor-workspaces` plugin block in `binds.conf` | plugin not installed, every one of its binds commented out |
+| `hypr/conf/monitor.conf` | duplicated the monitor lines that `binds.lua` also set |
+| `split-monitor-workspaces` plugin block in `binds.lua` | plugin not installed, every one of its binds commented out |
 | `gestures { workspace_swipe }` | **option no longer exists in 0.55** — `hyprctl getoption gestures:workspace_swipe` → "no such option". Rewritten with the current `gesture =` syntax |
 | `bind = , XF86Refresh, exec, xdotool key F5` | xdotool is X11-only, does nothing under Wayland |
 | `reload-waybar.sh` / `reload-hyprpaper.sh` | `killall -9` + `sleep 1` + respawn → `killall -SIGUSR1 waybar` and hyprpaper's IPC |
@@ -94,7 +94,7 @@ install. These all pointed at things that did not exist:
 - **`SUPER + Print`** ran `$(date ...)` twice in one command line, so `grim` wrote one
   filename and `wl-copy` read a different, non-existent one. Now `screenshot.sh`.
 - **Workspaces pinned to `eDP-1`/`HDMI-A-1`** in the shared config — on any other
-  machine those workspaces attach to a monitor that isn't there. Moved to `host.conf`.
+  machine those workspaces attach to a monitor that isn't there. Moved to `host.lua`.
 - **`gpu.sh`** printed `GPU n/a` forever without nvidia-smi; now returns empty text so
   waybar hides the module.
 - **`hyprland/workspaces` and `idle_inhibitor`** were configured in `modules.json` but
@@ -144,6 +144,7 @@ Hyprland features the old config didn't use, all verified against this 0.55.4 bu
   the password types in English.
 - `keyboard-state` (numlock/capslock) was dropped from the bar in favour of the layout
   indicator, which matters more with two layouts. Add it back in `modules-right` if you miss it.
-- Hyprland's wiki says hyprlang config is deprecated in favour of Lua going forward.
-  0.55.4 still reads `hyprland.conf` natively, so this repo stays hyprlang — revisit
-  when Lua stops being optional.
+- The compositor config is Lua (`hyprland.lua`): hyprlang is deprecated since
+  Hyprland 0.55 and `hyprland.conf` support is being removed. `hyprlock`, `hypridle`,
+  `hyprpaper` and `hyprsunset` are separate programs and still read their own
+  `.conf` files.
