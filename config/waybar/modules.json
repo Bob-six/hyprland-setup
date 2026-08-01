@@ -58,8 +58,8 @@
         "tooltip-format-activated": "Idle inhibited — screen stays on",
         "tooltip-format-deactivated": "Idle normal",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
+            "activated": "",
+            "deactivated": ""
         }
     },
 
@@ -114,9 +114,9 @@
 
     "network": {
         "format": "{ifname}",
-        "format-wifi": " {essid} ({signalStrength}%)",
-        "format-ethernet": "  {ifname}",
-        "format-disconnected": "Disconnected ⚠",
+        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-ethernet": " {ifname}",
+        "format-disconnected": " Disconnected",
         "tooltip-format": " {ifname} via {gwaddr}",
         "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
         "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",

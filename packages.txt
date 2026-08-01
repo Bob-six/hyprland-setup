@@ -57,7 +57,8 @@ papirus-icon-theme        # rofi and dunst both ask for Papirus-Dark
 nwg-look                  # GTK theme picker for wayland
 
 # ── Fonts the configs name explicitly ──────────────────────────────
-ttf-jetbrains-mono-nerd   # waybar + rofi + kitty
+ttf-jetbrains-mono-nerd   # rofi + kitty
+ttf-iosevka-nerd          # waybar
 ttf-firacode-nerd         # alacritty
 inter-font                # dunst
 ttf-font-awesome          # waybar glyph fallbacks

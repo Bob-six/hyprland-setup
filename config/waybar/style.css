@@ -17,10 +17,11 @@
 
 /* ─── Base ─────────────────────────────────────────────────── */
 * {
-  font-family: "JetBrainsMono Nerd Font", "Fira Sans",
+  font-family: "Iosevka Nerd Font", "Fira Sans",
                "Font Awesome 6 Free", "Font Awesome 6 Brands", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
   border: none;
   border-radius: 0;
   min-height: 0;
@@ -54,6 +55,7 @@ window#waybar {
   border: 1px solid @border;
   border-radius: 12px;
   color: @fg;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.28);
 }
 
 /* subtle lift + brighter edge on hover */
@@ -71,6 +73,7 @@ window#waybar {
 #custom-exit:hover {
   background: @hover;
   border-color: rgba(180,190,254,0.45);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.32);
 }
 
 /* ─── App menu (left) ──────────────────────────────────────── */
@@ -80,6 +83,7 @@ window#waybar {
   font-weight: 700;
   padding: 4px 16px;
   margin-left: 8px;
+  box-shadow: 0 2px 8px rgba(137,180,250,0.35);
 }
 
 /* ─── Workspaces ───────────────────────────────────────────── */
@@ -89,6 +93,7 @@ window#waybar {
   background: @bg;
   border: 1px solid @border;
   border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.28);
 }
 #workspaces button {
   padding: 0 8px;
@@ -101,6 +106,7 @@ window#waybar {
   color: @bg-solid;
   background: linear-gradient(135deg, @accent, @mauve);
   font-weight: 700;
+  box-shadow: 0 1px 6px rgba(137,180,250,0.45);
 }
 #workspaces button.urgent { color: @bg-solid; background: @red; }
 #workspaces button:hover  { color: @fg; background: @hover; }
@@ -167,5 +173,6 @@ tooltip {
   background: @bg-solid;
   border: 1px solid @border;
   border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
 }
 tooltip label { color: @fg; padding: 4px; }

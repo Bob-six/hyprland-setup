@@ -131,7 +131,7 @@
 
     ### Text ###
 
-    font = "Inter Medium 10"
+    font = "Inter Medium 11"
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -171,7 +171,7 @@
     #   %n  progress value if set without any extra characters
     #   %%  Literal %
     # Markup is allowed
-    format = "<b>%s</b>\n<span size='small'>%b</span>"
+    format = "<b>%s</b>\n<span size='small' alpha='55705'>%b</span>"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".
