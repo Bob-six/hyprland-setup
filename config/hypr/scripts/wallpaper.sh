@@ -15,6 +15,6 @@ hyprctl hyprpaper preload "$dir/$pick"
 hyprctl hyprpaper wallpaper ",$dir/$pick"
 hyprctl hyprpaper unload unused
 
-# Persist it: rewrite every wallpapers/<file> reference (preload + path).
-# Matches whether the config spells the dir with ~ or absolutely.
-sed -i -E "s|(wallpapers/)[^ ]+|\1${pick}|g" "$conf"
+# Persist it: rewrite the wallpapers/<file> reference on the preload/path
+# lines only — an unanchored match also rewrote the comments at the top.
+sed -i -E "/^[[:space:]]*(preload|path)[[:space:]]*=/ s|(wallpapers/)[^ ]+|\1${pick}|" "$conf"

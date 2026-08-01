@@ -4,7 +4,7 @@
 TERM = "alacritty"
 
 [window]
-opacity = 1.0
+opacity = 0.82   # blur comes from the compositor (hypr/conf/decoration.conf)
 dynamic_padding = true
 decorations = "none"
 dynamic_title = true
@@ -17,20 +17,28 @@ y = 14
 history = 10000
 multiplier = 3
 
+# "FiraCode Nerd Font Mono" ships the devicon/powerline glyphs neo-tree and
+# lualine use, at fixed monospace advance — plain "FiraCode" had no coverage,
+# so those glyphs came from whatever fallback fontconfig picked and rendered
+# at inconsistent widths in the tree.
 [font]
 size = 12.0
 
 [font.normal]
-family = "FiraCode"
+family = "FiraCode Nerd Font Mono"
 style = "Regular"
 
 [font.bold]
-family = "FiraCode"
+family = "FiraCode Nerd Font Mono"
 style = "Bold"
 
 [font.italic]
-family = "FiraCode"
+family = "FiraCode Nerd Font Mono"
 style = "Italic"
+
+[font.bold_italic]
+family = "FiraCode Nerd Font Mono"
+style = "Bold Italic"
 
 [font.offset]
 y = 1
