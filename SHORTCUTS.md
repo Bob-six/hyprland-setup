@@ -19,6 +19,8 @@ file as the printable copy.
 | `SUPER + E` | File manager |
 | `SUPER + V` | Clipboard history |
 | `SUPER + W` | Change wallpaper |
+| `SUPER + SHIFT + T` | Time tracker widget |
+| `SUPER + SHIFT + K` | Tasks widget |
 | `SUPER + slash` | Show these keybinds |
 
 ## Session
@@ -32,12 +34,14 @@ file as the printable copy.
 | `SUPER + CTRL + B` | Hide/show waybar |
 | `SUPER + N` | Show last notification |
 | `SUPER + SHIFT + N` | Dismiss all notifications |
+| `SUPER + ALT + N` | Pause notifications |
 
 ## Windows
 
 | Keys | Action |
 | --- | --- |
 | `SUPER + Q` | Close window |
+| `SUPER + SHIFT + Q` | Force kill window |
 | `SUPER + T` | Float/tile window |
 | `SUPER + F` | Fullscreen |
 | `SUPER + SHIFT + F` | Maximize (keep the bar) |
@@ -117,6 +121,9 @@ file as the printable copy.
 | `SUPER + CTRL + Print` | Screenshot region and annotate |
 
 ## Media & hardware keys
+
+Volume, brightness, and mic keys run `scripts/osd.sh` (a dunst progress bar).
+The action names below are still the bind descriptions.
 
 | Keys | Action |
 | --- | --- |

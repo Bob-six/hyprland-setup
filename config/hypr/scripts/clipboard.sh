@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Clipboard history picker. cliphist records every copy (see autostart.conf);
+# Clipboard history picker. cliphist records every copy (see conf/autostart.lua);
 # this reads it back and puts the pick on the clipboard.
 # Wipe history with: cliphist wipe
 set -euo pipefail

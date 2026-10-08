@@ -3,3 +3,7 @@ config/hypr/conf/host.lua
 
 # install.sh backups
 *.bak.*
+
+# widget bytecode
+__pycache__/
+*.pyc

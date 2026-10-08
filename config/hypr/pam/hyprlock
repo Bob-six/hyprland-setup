@@ -1,0 +1,14 @@
+#%PAM-1.0
+# Screen-unlock lockout only (isolated from sudo/login faillock).
+# 5 fails → 1 min, 10 fails → 5 min, 15 fails → 10 min.
+
+auth        requisite                   pam_nologin.so
+auth        required                    pam_faillock.so      preauth conf=/etc/security/faillock-hypr-1min.conf
+auth        required                    pam_faillock.so      preauth conf=/etc/security/faillock-hypr-5min.conf
+auth        required                    pam_faillock.so      preauth conf=/etc/security/faillock-hypr-10min.conf
+-auth       [success=2 default=ignore]  pam_systemd_home.so
+auth        [success=1 default=bad]     pam_unix.so          try_first_pass nullok
+auth        [default=die]               pam_faillock.so      authfail conf=/etc/security/faillock-hypr-10min.conf
+auth        optional                    pam_permit.so
+auth        required                    pam_env.so
+auth        required                    pam_faillock.so      authsucc conf=/etc/security/faillock-hypr-10min.conf

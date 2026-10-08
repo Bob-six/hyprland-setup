@@ -19,20 +19,16 @@
     #   keyboard: follow window with keyboard focus
     #   none: don't follow anything
     #
-    # "keyboard" needs a window manager that exports the
-    # _NET_ACTIVE_WINDOW property.
-    # This should be the case for almost all modern window managers.
-    #
-    # If this option is set to mouse or keyboard, the monitor option
-    # will be ignored.
-    follow = none
+    # Wayland: mouse and keyboard are the same (last-interacted output).
+    # Dual-monitor: HDMI-A-1 + eDP-1 — never pin to monitor 0.
+    follow = mouse
 
     ### Geometry ###
 
     # dynamic width from 0 to 300
     # width = (0, 300)
     # constant width of 300
-    width = (250, 380)
+    width = (280, 400)
 
     # The maximum height of a single notification, excluding the frame.
     height = (0,300)
@@ -40,14 +36,15 @@
     # Position the notification in the top right corner
     origin = top-right
 
-    # Offset from the origin
-    offset = 16x16
+    # Offset from the origin. Wayland places this relative to waybar's
+    # exclusive zone, so 12px is a gap under the bar, not an overlap.
+    offset = (16, 12)
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
 
     # Maximum number of notification (0 means no limit)
-    notification_limit = 20
+    notification_limit = 5
 
     ### Progress bar ###
 
@@ -57,10 +54,10 @@
 
     # Set the progress bar height. This includes the frame, so make sure
     # it's at least twice as big as the frame width.
-    progress_bar_height = 10
+    progress_bar_height = 8
 
     # Set the frame width of the progress bar
-    progress_bar_frame_width = 1
+    progress_bar_frame_width = 0
 
     # Set the minimum width for the progress bar
     progress_bar_min_width = 150
@@ -69,7 +66,7 @@
     progress_bar_max_width = 300
 
     # Corner radius for the progress bar. 0 disables rounded corners.
-    progress_bar_corner_radius = 6
+    progress_bar_corner_radius = 4
 
     # Corner radius for the icon image.
     icon_corner_radius = 8
@@ -79,9 +76,8 @@
     indicate_hidden = yes
 
     # The transparency of the window.  Range: [0; 100].
-    # This option will only work if a compositing window manager is
-    # present (e.g. xcompmgr, compiz, etc.). (X11 only)
-    transparency = 10
+    # X11 only. Wayland alpha lives in the background hex (see urgency_*).
+    transparency = 0
 
     # Draw a line of "separator_height" pixel height between two
     # notifications.
@@ -99,8 +95,8 @@
     text_icon_padding = 12
 
     # Defines width in pixels of frame around the notification window.
-    # Set to 0 to disable.
-    frame_width = 2
+    # Set to 0 to disable. 1px matches rofi's glass border.
+    frame_width = 1
 
     # Defines color of the frame around the notification window.
     frame_color = "#7aa2f7"
@@ -135,7 +131,7 @@
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
-    line_height = 1
+    line_height = 3
 
     # Possible values are:
     # full: Allow a small subset of html markup in notifications:
@@ -171,20 +167,23 @@
     #   %n  progress value if set without any extra characters
     #   %%  Literal %
     # Markup is allowed
-    format = "<b>%s</b>\n<span size='small' alpha='55705'>%b</span>"
+    # &#x200E; = LRM so RTL bodies (fa/ar) stack under the title instead of
+    # hugging the right edge of a wide toast (Pango ALIGN_LEFT + RTL paragraph).
+    format = "<span size='small' foreground='#7aa2f7'>%a</span>\n<b>%s</b>\n&#x200E;%b"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".
+    # Pango still RTL-aligns Arabic/Persian lines; left keeps LTR titles put.
     alignment = left
 
     # Vertical alignment of message text and icon.
     # Possible values are "top", "center" and "bottom".
-    vertical_alignment = center
+    vertical_alignment = top
 
     # Show age of message if message is older than show_age_threshold
     # seconds.
-    # Set to -1 to disable.
-    show_age_threshold = 60
+    # Set to -1 to disable. Age in the corner fights RTL bodies.
+    show_age_threshold = -1
 
     # Specify where to make an ellipsis in long lines.
     # Possible values are "start", "middle" and "end".
@@ -200,7 +199,8 @@
     hide_duplicate_count = false
 
     # Display indicators for URLs (U) and actions (A).
-    show_indicators = yes
+    # Telegram always has an action → leftover "(A)" next to the icon.
+    show_indicators = no
 
     ### Icons ###
 
@@ -272,9 +272,9 @@
     ### Wayland ###
     # These settings are Wayland-specific. They have no effect when using X11
 
-    # Uncomment this if you want to let notications appear under fullscreen
-    # applications (default: overlay)
-    # layer = top
+    # overlay: OSD still visible in games. Non-critical toasts are
+    # pushback'd by the fullscreen rule below.
+    layer = overlay
 
     # Set this to true to use X11 output on Wayland.
     force_xwayland = false
@@ -324,28 +324,30 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#1a1b26EE"
+    # Glass, same family as rofi (bg0 #14161E).
+    background = "#14161E8C"
     foreground = "#a9b1d6"
     frame_color = "#ffffff33"
-    timeout = 5
-    # Icon for notifications with low urgency, uncomment to enable
-    #default_icon = /path/to/icon
+    highlight = "#7aa2f7"
+    timeout = 4
+    default_icon = dialog-information
 
 [urgency_normal]
-    background = "#1a1b26F2"
-    foreground = "#c0caf5"
+    background = "#14161E99"
+    foreground = "#e0e6f0"
     frame_color = "#7aa2f7AA"
+    highlight = "#7aa2f7, #bb9af7"
     timeout = 6
-    # Icon for notifications with normal urgency, uncomment to enable
-    #default_icon = /path/to/icon
+    default_icon = dialog-information
 
 [urgency_critical]
-    background = "#2d1b2eF2"
+    background = "#2d1b2eB3"
     foreground = "#f7768e"
-    frame_color = "#f7768eDD"
+    frame_color = "#f7768eEE"
+    highlight = "#f7768e"
     timeout = 0
-    # Icon for notifications with critical urgency, uncomment to enable
-    #default_icon = /path/to/icon
+    default_icon = dialog-error
+    override_pause_level = 60
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
@@ -416,11 +418,34 @@
 #        If the notification is already drawn, it won't get undrawn.
 # pushback: same as delay, but when switching into fullscreen, the notification will get
 #           withdrawn from screen again and will get delayed like a new notification
-#[fullscreen_delay_everything]
-#    fullscreen = delay
-#[fullscreen_show_critical]
-#    msg_urgency = critical
-#    fullscreen = show
+[fullscreen_pushback]
+    fullscreen = pushback
+[fullscreen_show_critical]
+    msg_urgency = critical
+    fullscreen = show
+
+# Volume / brightness / mic OSD from ~/.config/hypr/scripts/osd.sh
+[osd]
+    appname = osd
+    timeout = 2
+    urgency = low
+    format = "<b>%s</b>  %b"
+    history_ignore = yes
+    set_transient = yes
+    fullscreen = show
+
+[screenshot]
+    appname = Screenshot
+    timeout = 4
+    format = "<b>%s</b>\n%b"
+
+# Icon already says Telegram. Skip app name / (A) clutter, keep sender + body.
+[telegram]
+    appname = "Telegram Desktop"
+    format = "<b>%s</b>\n&#x200E;%b"
+[telegram-entry]
+    desktop_entry = org.telegram.desktop
+    format = "<b>%s</b>\n&#x200E;%b"
 
 #[espeak]
 #    summary = "*"

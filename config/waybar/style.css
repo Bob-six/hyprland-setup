@@ -47,6 +47,7 @@ window#waybar {
 #language,
 #idle_inhibitor,
 #custom-gpu,
+#custom-dunst,
 #custom-appmenu,
 #custom-exit {
   margin: 3px 3px;
@@ -67,6 +68,7 @@ window#waybar {
 #custom-gpu:hover,
 #language:hover,
 #idle_inhibitor:hover,
+#custom-dunst:hover,
 #bluetooth:hover,
 #clock:hover,
 #custom-appmenu:hover,
@@ -86,30 +88,17 @@ window#waybar {
   box-shadow: 0 2px 8px rgba(137,180,250,0.35);
 }
 
-/* ─── Workspaces ───────────────────────────────────────────── */
-#workspaces {
+/* ─── Active workspace only ────────────────────────────────── */
+#custom-workspace {
   margin: 3px 3px;
-  padding: 0 3px;
-  background: @bg;
-  border: 1px solid @border;
-  border-radius: 12px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.28);
-}
-#workspaces button {
-  padding: 0 7px;
-  margin: 3px 1px;
-  color: @muted;
-  background: transparent;
-  border-radius: 9px;
-}
-#workspaces button.active {
+  padding: 0 11px;
+  min-width: 1.2em;
   color: @bg-solid;
   background: linear-gradient(135deg, @accent, @mauve);
   font-weight: 700;
+  border-radius: 12px;
   box-shadow: 0 1px 6px rgba(137,180,250,0.45);
 }
-#workspaces button.urgent { color: @bg-solid; background: @red; }
-#workspaces button:hover  { color: @fg; background: @hover; }
 
 /* ─── Window title (center) ────────────────────────────────── */
 #window {
@@ -133,12 +122,15 @@ window#waybar.empty #window {
 #language       { color: @muted; }
 #idle_inhibitor { color: @muted; }
 #bluetooth      { color: @accent; }
+#custom-dunst   { color: @muted; }
 
 /* ─── States ───────────────────────────────────────────────── */
 #pulseaudio.muted { color: @red; }
 #network.disconnected { color: @red; }
 #idle_inhibitor.activated { color: @yellow; }
 #bluetooth.disabled, #bluetooth.off { color: @muted; }
+#custom-dunst.unread { color: @accent; }
+#custom-dunst.paused { color: @red; }
 
 #battery.charging,
 #battery.plugged { color: @teal; }

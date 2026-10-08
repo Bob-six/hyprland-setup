@@ -14,6 +14,7 @@ pick=$(find "$dir" -maxdepth 1 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -
 hyprctl hyprpaper preload "$dir/$pick"
 hyprctl hyprpaper wallpaper ",$dir/$pick"
 hyprctl hyprpaper unload unused
+notify-send -a Wallpaper -i "$dir/$pick" "Wallpaper" "$pick"
 
 # Persist it: rewrite the wallpapers/<file> reference on the preload/path
 # lines only — an unanchored match also rewrote the comments at the top.

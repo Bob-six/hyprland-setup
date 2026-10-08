@@ -42,8 +42,18 @@ grim                      # screenshots
 slurp                     # region select
 swappy                    # screenshot annotation
 jq                        # lock.sh, keybinds.sh
+btop                      # every waybar system module opens it on click
 polkit
 xdg-user-dirs
+
+# ── Desktop widgets (timetracker.py, taskwidget.py) ────────────────
+python-gobject            # Gtk + GtkLayerShell via GI
+python-cairo
+gtk3
+gtk-layer-shell
+
+# ── Browser ────────────────────────────────────────────────────────
+google-chrome-stable      # AUR; what SUPER+B launches
 
 # ── File manager ───────────────────────────────────────────────────
 thunar
@@ -66,7 +76,7 @@ noto-fonts
 noto-fonts-emoji
 
 # ── Hardware video decode ──────────────────────────────────────────
-# Intel iGPU (what conf/host.conf's LIBVA_DRIVER_NAME=iHD expects)
+# Intel iGPU (what conf/host.lua's LIBVA_DRIVER_NAME=iHD expects)
 intel-media-driver
 libva-utils
 # NVIDIA: uncomment on a machine with one. nvidia-open-dkms for Turing+.

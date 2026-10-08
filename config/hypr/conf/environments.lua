@@ -28,3 +28,16 @@ hl.env("HYPRCURSOR_SIZE", "24")
 
 -- Don't let appimaged hijack AppImage launches
 hl.env("APPIMAGELAUNCHER_DISABLE", "1")
+
+-- SUPER+R is `rofi -show drun`. Rofi inherits this compositor PATH, not fish's.
+-- systemd/Hyprland default is /usr/local/bin:/usr/bin, so ~/.local/bin apps
+-- (blender, grok-bot, …) fail with "No such file or directory".
+do
+    local home = os.getenv("HOME")
+    local local_bin = home .. "/.local/bin"
+    local path = os.getenv("PATH") or "/usr/local/bin:/usr/bin"
+    if not path:find(local_bin, 1, true) then
+        path = local_bin .. ":" .. path
+    end
+    hl.env("PATH", path)
+end

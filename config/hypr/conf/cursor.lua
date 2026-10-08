@@ -9,6 +9,8 @@ hl.config({
         hide_on_key_press = true,
         inactive_timeout = 10,
 
-        -- default_monitor = "Bibata-Modern-Ice"
+        -- The cursor *theme* is set by XCURSOR_THEME in conf/environments.lua,
+        -- not here. cursor:default_monitor takes an output name (e.g. "eDP-1")
+        -- and only decides where the pointer lands at startup.
     },
 })

@@ -2,8 +2,8 @@
 # Searchable keybind cheat sheet.
 #
 # Reads the binds Hyprland actually has loaded (`hyprctl binds -j`) instead of
-# parsing binds.conf, so it can't go stale: every bind declared with the `d`
-# flag shows up with its description. (The old ML4W keybindings.sh parsed a
+# parsing conf/binds.lua, so it can't go stale: every bind declared with a
+# `description` shows up here. (The old ML4W keybindings.sh parsed a
 # keybindings.conf that didn't exist.)
 #
 # Run with --test to check the modmask decoding without opening rofi.

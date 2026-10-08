@@ -34,6 +34,8 @@ bind(mainMod .. " + B", "Browser", exec(browser))
 bind(mainMod .. " + E", "File manager", exec(files))
 bind(mainMod .. " + V", "Clipboard history", exec(scripts .. "/clipboard.sh"))
 bind(mainMod .. " + W", "Change wallpaper", exec(scripts .. "/wallpaper.sh"))
+bind(mainMod .. " + SHIFT + T", "Time tracker widget", exec(scripts .. "/timetracker.py"))
+bind(mainMod .. " + SHIFT + K", "Tasks widget", exec(scripts .. "/taskwidget.py"))
 bind(mainMod .. " + slash", "Show these keybinds", exec(scripts .. "/keybinds.sh"))
 
 -- ── Session ────────────────────────────────────────────────────────
@@ -44,9 +46,11 @@ bind(mainMod .. " + SHIFT + B", "Restart waybar", exec("killall waybar; waybar &
 bind(mainMod .. " + CTRL + B", "Hide/show waybar", exec("killall -SIGUSR1 waybar"))
 bind(mainMod .. " + N", "Show last notification", exec("dunstctl history-pop"))
 bind(mainMod .. " + SHIFT + N", "Dismiss all notifications", exec("dunstctl close-all"))
+bind(mainMod .. " + ALT + N", "Pause notifications", exec("dunstctl set-paused toggle"))
 
 -- ── Window ─────────────────────────────────────────────────────────
 bind(mainMod .. " + Q", "Close window", hl.dsp.window.close())
+bind(mainMod .. " + SHIFT + Q", "Force kill window", exec("hyprctl dispatch forcekillactive"))
 bind(mainMod .. " + T", "Float/tile window", hl.dsp.window.float({ action = "toggle" }))
 bind(mainMod .. " + F", "Fullscreen", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 bind(mainMod .. " + SHIFT + F", "Maximize (keep the bar)", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
@@ -103,14 +107,14 @@ bind(mainMod .. " + CTRL + Print", "Screenshot region and annotate", exec(script
 
 -- ── Media & hardware keys ──────────────────────────────────────────
 local held = { locked = true, repeating = true }
-bind("XF86AudioRaiseVolume", "Volume up", exec("wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"), held)
-bind("XF86AudioLowerVolume", "Volume down", exec("wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"), held)
-bind("XF86MonBrightnessUp", "Brightness up", exec("brightnessctl set 10%+"), held)
-bind("XF86MonBrightnessDown", "Brightness down", exec("brightnessctl set 10%-"), held)
+bind("XF86AudioRaiseVolume", "Volume up", exec(scripts .. "/osd.sh volume up"), held)
+bind("XF86AudioLowerVolume", "Volume down", exec(scripts .. "/osd.sh volume down"), held)
+bind("XF86MonBrightnessUp", "Brightness up", exec(scripts .. "/osd.sh brightness up"), held)
+bind("XF86MonBrightnessDown", "Brightness down", exec(scripts .. "/osd.sh brightness down"), held)
 
 local locked = { locked = true }
-bind("XF86AudioMute", "Mute output", exec("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), locked)
-bind("XF86AudioMicMute", "Mute microphone", exec("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), locked)
+bind("XF86AudioMute", "Mute output", exec(scripts .. "/osd.sh volume mute"), locked)
+bind("XF86AudioMicMute", "Mute microphone", exec(scripts .. "/osd.sh mic"), locked)
 bind("XF86WLAN", "Toggle wifi", exec("nmcli radio wifi toggle"), locked)
 bind("XF86AudioPlay", "Play/pause", exec("playerctl play-pause"), locked)
 bind("XF86AudioNext", "Next track", exec("playerctl next"), locked)

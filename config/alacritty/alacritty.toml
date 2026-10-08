@@ -4,7 +4,7 @@
 TERM = "alacritty"
 
 [window]
-opacity = 0.82   # blur comes from the compositor (hypr/conf/decoration.conf)
+opacity = 0.82   # blur comes from the compositor (hypr/conf/decoration.lua)
 dynamic_padding = true
 decorations = "none"
 dynamic_title = true

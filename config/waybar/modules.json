@@ -6,14 +6,16 @@
 //
 // Docs: https://github.com/Alexays/Waybar/wiki/Configuration
 {
-    // Workspaces — only the ones on this output, so the second monitor's bar
-    // shows 11-14 and the laptop's shows 1-10.
-    "hyprland/workspaces": {
-        "on-click": "activate",
-        "all-outputs": false,
-        "format": "{name}",
-        "on-scroll-up": "hyprctl dispatch workspace e+1",
-        "on-scroll-down": "hyprctl dispatch workspace e-1"
+    // Active workspace on this output only. Scroll still switches.
+    // hyprland/workspaces active-only still draws Hyprland persistent rules
+    // (host.lua pins 1-14), so this listens on the event socket instead.
+    "custom/workspace": {
+        "exec": "~/.config/waybar/scripts/workspace.py",
+        "format": "{}",
+        "restart-interval": 1,
+        "tooltip": false,
+        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'",
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'"
     },
 
     "hyprland/window": {
@@ -166,7 +168,20 @@
             "default": ["󰕿", "󰖀", "󰕾"]
         },
         "on-click": "pavucontrol",
-        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-        "scroll-step": 5
+        "on-click-right": "~/.config/hypr/scripts/osd.sh volume mute",
+        "on-scroll-up": "~/.config/hypr/scripts/osd.sh volume up",
+        "on-scroll-down": "~/.config/hypr/scripts/osd.sh volume down",
+        "scroll-step": 0
+    },
+
+    // Dunst: history count, pause, dismiss
+    "custom/dunst": {
+        "exec": "~/.config/waybar/scripts/dunst.sh",
+        "return-type": "json",
+        "interval": 2,
+        "on-click": "dunstctl history-pop",
+        "on-click-right": "dunstctl set-paused toggle",
+        "on-click-middle": "dunstctl close-all",
+        "escape": true
     }
 }
